@@ -22,7 +22,7 @@ app.use(koaBody({
 
 app.use(router());
 
-const server = http.createServer(app.callback()).listen(9090);
+const server = http.createServer(app.callback()).listen(port);
 const wsServer = new WS.Server({server});
 
 wsServer.on('connection', (ws) => {
