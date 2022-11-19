@@ -9,6 +9,7 @@ const WS = require('ws');
 const {v4: uuidv4,} = require('uuid');
 const actualDialog = require('./dataBase/actualDialog.js');
 const users = require('./dataBase/users.js');
+const port = process.env.PORT || 9090;
 
 app.use(cors());
 
@@ -66,7 +67,7 @@ wsServer.on('connection', (ws) => {
             .forEach(client => client.send(JSON.stringify(sendData)));
         } else {
             actualDialog.push(JSON.parse(message.toString()));
-            
+
             Array.from(wsServer.clients)
             .filter(client => client.readyState === WS.OPEN)
             .forEach(client => client.send(message.toString()));
